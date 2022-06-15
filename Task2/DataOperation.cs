@@ -10,7 +10,11 @@ namespace Task2
     {
         public List<(string cutomerName, double purchaseAmount, DateTime purchaseDate)> MergeData(List<Customer> customers, List<Purchase> purchases)
         {
-            throw new NotImplementedException();
+            var query = from c in customers
+                        join p in purchases
+                        on c.Id equals p.CustomerId
+                        select (c.Name, p.Amount, p.PurchasedOn);
+            return (List<(string cutomerName, double purchaseAmount, DateTime purchaseDate)>)query;
         }
     }
 }
